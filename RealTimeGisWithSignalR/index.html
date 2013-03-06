@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Shapes and Symbols</title>
+
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
+
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+
+    <script src="Scripts/jquery.signalR-1.0.0.js"></script>
+    <!--  If this is an MVC project then use the following -->
+    <!--  <script src="~/signalr/hubs" type="text/javascript"></script> -->
+    <script src="/signalr/hubs" type="text/javascript"></script>
+
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
+    <script src="realTimePoints.js"></script>
+</head>
+<body class="claro">
+    <button onclick="tb.activate(esri.toolbars.Draw.POINT);">Point</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.POLYLINE);">Polyline</button>
+
+    <button onclick="tb.deactivate()">Deactivate</button>
+
+    My name is: <input type="text" id="txtUserName" /><button onclick="btnUpdateUserName_Click()">Update</button>
+
+    <div id="map" style="width: 800px; height: 400px; border: 2px solid #000;" class="claro"></div>
+
+    <br />
+
+    <div id="graphicsLayersCount"></div>
+
+    <div id="legendDiv"></div>
+
+    <br />
+    Zoom Slider :
+    <input type="button" value="Hide" onclick="map.hideZoomSlider()" />
+    <input type="button" value="Show" onclick="map.showZoomSlider()" />
+
+</body>
+</html>
