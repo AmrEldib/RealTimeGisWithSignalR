@@ -64,6 +64,26 @@ $(function () {
     };
 
     // This function is callable from the server
+    realTimePoints.client.addPolygon = function addPolygon(cid, rings) {
+
+        // Create polygon object and set its geometry
+        var polygon = new esri.geometry.Polygon(new esri.SpatialReference({ wkid: 102100 }));
+        polygon.rings = rings;
+
+        // Get the layer of remote user to which the polygon will be added
+        var gLayer = map.getLayer(cid);
+
+        // Set up symbol and color of polygon
+        // Get color from the layersColors list
+        var symbol = new esri.symbol.SimpleFillSymbol();
+        var clr = layersColors[layersColors.indexOf(cid) + 1];
+        symbol.setColor(new dojo.Color(clr));
+
+        // Add polygon to graphics layer
+        gLayer.add(new esri.Graphic(polygon, symbol));
+    };
+
+    // This function is callable from the server
     realTimePoints.client.addLayer = function addLayer(cid, color) {
 
         // Create new layer
@@ -168,6 +188,13 @@ function addGraphic(geometry) {
         symbol.setColor(new dojo.Color(clr));
         // Notify the server about the line
         realTimePoints.server.addPolyline(geometry.paths);
+    }
+    else if (type === "polygon") {
+        var symbol = new esri.symbol.SimpleFillSymbol();
+        var clr = layersColors[layersColors.indexOf($.connection.hub.id) + 1];
+        symbol.setColor(new dojo.Color(clr));
+        // Notify the server about the line
+        realTimePoints.server.addPolygon(geometry.rings);
     }
     else {
         symbol = tb.fillSymbol;

@@ -30,6 +30,13 @@ namespace RealTimeGisWithSignalR.Test
         }
 
         // Public method callable from clients
+        public void AddPolygon(double[][][] rings)
+        {
+            // Notify clients to add polygon
+            Clients.All.addPolygon(Context.ConnectionId, rings);
+        }
+
+        // Public method callable from clients
         public void UpdateUserName(string userName)
         {
             // Update username
